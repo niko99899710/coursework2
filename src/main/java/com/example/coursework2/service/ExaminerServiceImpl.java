@@ -2,11 +2,12 @@ package com.example.coursework2.service;
 
 import com.example.coursework2.exception.ExceptionBADREQUEST;
 import com.example.coursework2.model.Question;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-
+@Service
 public class ExaminerServiceImpl implements ExaminerService{
     private final QuestionService questionService;
 

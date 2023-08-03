@@ -2,9 +2,8 @@ package com.example.coursework2;
 
 import com.example.coursework2.exception.ExceptionBADREQUEST;
 import com.example.coursework2.model.Question;
-import com.example.coursework2.repository.QuestionRepository;
 import com.example.coursework2.service.ExaminerService;
-import com.example.coursework2.service.JavaQuestionService;
+import com.example.coursework2.service.ExaminerServiceImpl;
 import com.example.coursework2.service.QuestionService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,7 +22,7 @@ public class ExaminerServiceImplTest {
     @BeforeEach
     public void init(){
         questionService = Mockito.mock(QuestionService.class);
-        examinerService = Mockito.mock(ExaminerService.class);
+        examinerService = new ExaminerServiceImpl(questionService);
     }
     @Test
     public void exceptionDoNotWorry (){
@@ -32,6 +31,6 @@ public class ExaminerServiceImplTest {
         Question question3 = new Question("дыня будешь?", "подумаю");
         Question question4 = new Question("киви будешь?", "может быть");
         when(questionService.getAllQuestion()).thenReturn(List.of(question1,question2,question3,question4));
-        Assertions.assertThrows(ExceptionBADREQUEST.class, () -> examinerService.getQuestions(23));
+        Assertions.assertThrows(ExceptionBADREQUEST.class, () -> examinerService.getQuestions(6));
     }
 }
